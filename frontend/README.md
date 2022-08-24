@@ -2,7 +2,7 @@
 
 *Онлайн сервис для размещения фотографий - микроInstagram*
 
-Ссылка на страницу: https://igortimonin.github.io/mesto-react/index.html
+Ссылка на страницу: https://itmesto.students.nomoredomains.sbs
 
 Адаптивный сайт, на чистом HTML5 + CSS3 c функционалом написанной на JavaScript: 
 - создание карточек с фото как экземпляры класса Card
