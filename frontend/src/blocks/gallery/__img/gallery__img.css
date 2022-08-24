@@ -1,0 +1,11 @@
+.gallery__img {
+  height: 282px;
+  width: 282px;
+  min-width: 282px;
+  min-height: 282px;
+  object-fit:cover;
+}
+
+.gallery__img:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,41 @@
+.auth__field {
+  outline: none;
+  border: none;
+  padding: 0 0 10px 0;
+  vertical-align: middle;
+  border-bottom: 2px solid #cccccc;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #cccccc;
+  background-color: #000;
+}
+
+.auth__field::placeholder {
+  color: #cccccc;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.auth__field:autofill,
+.auth__field:autofill:hover, 
+.auth__field:autofill:focus,  
+.auth__field:autofill:active{
+    box-shadow: 0 0 0 30px rgb(0, 0, 0) inset !important;
+    color: #ccc !important;
+}
+
+.auth__field:-webkit-autofill,
+.auth__field:-webkit-autofill:hover, 
+.auth__field:-webkit-autofill:focus,  
+.auth__field:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px rgb(0, 0, 0) inset !important;
+    box-shadow: 0 0 0 30px rgb(0, 0, 0) inset !important;
+    -webkit-text-fill-color: #ccc !important;
+}

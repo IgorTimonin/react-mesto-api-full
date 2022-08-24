@@ -1,0 +1,15 @@
+.gallery__cards {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  justify-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 282px);
+  gap: 17px;
+}
+
+@media screen and (max-width: 597px) {
+  .gallery__cards {
+    gap: 20px;
+  }
+}

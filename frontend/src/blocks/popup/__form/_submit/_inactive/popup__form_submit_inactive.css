@@ -1,0 +1,8 @@
+.popup__form_submit_inactive {
+  opacity: 0.2;
+  border: 1px solid #000;
+  background-color: #fff;
+  color: #000;
+  pointer-events: none;
+  user-select: none;
+}

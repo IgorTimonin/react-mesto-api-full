@@ -1,0 +1,10 @@
+.page {
+  background-color: #000;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  text-rendering: optimizeLegibility;
+  max-width: 880px;
+}

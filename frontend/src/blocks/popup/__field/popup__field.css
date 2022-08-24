@@ -1,0 +1,18 @@
+.popup__field {
+  outline: none;
+  border: none;
+  padding: 0 0 13px 0;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  /* color: rgb(255, 255, 255); */
+}
+
+.popup__field:last-of-type {
+  margin-top: 5px 0 12px 0;
+}

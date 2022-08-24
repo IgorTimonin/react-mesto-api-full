@@ -1,0 +1,10 @@
+.gallery__item {
+  max-width: 282px;
+  background-image: url(../../../images/no_pic.jpg);
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+}

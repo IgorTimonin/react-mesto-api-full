@@ -1,0 +1,9 @@
+.infoToolTip__pic {
+  display: flex;
+  min-height: 120px;
+  min-width: 120px;
+  align-self: center;
+  padding: 29px 0 32px 0;
+  background-repeat: no-repeat;
+  background-position: center;
+}

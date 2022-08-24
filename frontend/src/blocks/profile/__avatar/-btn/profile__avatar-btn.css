@@ -1,0 +1,14 @@
+.profile__avatar-btn {
+  margin-right: 30px;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+.profile__avatar-btn:hover {
+  background-image: url(/src/images/vector.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}

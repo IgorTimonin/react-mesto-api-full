@@ -1,0 +1,8 @@
+.input-error_auth {
+  visibility: hidden;
+  margin: 5px 0 9px 0;
+  max-height: 30px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}

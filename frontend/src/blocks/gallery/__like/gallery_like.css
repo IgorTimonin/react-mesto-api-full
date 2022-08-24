@@ -1,0 +1,6 @@
+.gallery_like {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+}

@@ -1,0 +1,29 @@
+.profile__edit-btn {
+  padding: 0 10px;
+  margin: 0 15px;
+  background-color: #000;
+  background-image: url(../../../images/pencil.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 24px;
+  min-height: 24px;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  transition: linear 0.3s;
+  margin-bottom: 10px;
+  align-self: center;
+}
+
+@media screen and (max-width: 945px) {
+  .profile__edit-btn {
+    margin-left: 15px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .profile__edit-btn {
+    margin-left: 10px;
+    width: 18px;
+    min-height: 18px;
+  }
+}
