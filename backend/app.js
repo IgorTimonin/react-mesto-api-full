@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
 const { celebrate, errors } = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-// const { errorCatcher } = require('./middlewares/errorCatcher');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -25,6 +25,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(requestLogger); // логгер запросов
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
@@ -42,8 +43,10 @@ app.use('/cards', auth, cardRouter);
 app.use('/*', auth, (req, res, next) => {
   next(new NotFoundError('Упс! Такой страницы не существует'));
 });
-app.use(errors());
+app.use(errorLogger); // логгер ошибок
+app.use(errors()); // обработчик ошибок celebrate
 
+// централизованный обработчик ошибок
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res.status(statusCode).send({
