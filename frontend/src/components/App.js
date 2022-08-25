@@ -35,7 +35,8 @@ function App() {
   });
   const [headerEmail, setHeaderEmail] = useState();
   const [currentCard, setCurrentCard] = useState({});
-  const userDataTargetUrl = 'https://nomoreparties.co/v1/cohort-41/users/me';
+  const userDataTargetUrl =
+    'https://api.itmesto.students.nomoredomains.sbs/users/me';
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggenIn] = useState(false);
   const nav = useNavigate();

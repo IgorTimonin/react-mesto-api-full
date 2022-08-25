@@ -9,7 +9,7 @@ class Api {
   constructor(baseUrl, headers) {
     this._baseUrl = baseUrl;
     this._headers = headers;
-    this.baseAuthUrl = 'https://auth.nomoreparties.co';
+    this.baseAuthUrl = 'https://api.itmesto.students.nomoredomains.sbs';
   }
 
   signInSignUp(endpoint, password, email) {
@@ -25,12 +25,14 @@ class Api {
 
   getInitialCards() {
     return fetch(this._baseUrl, {
+      credentials: 'include',
       headers: this._headers,
     }).then(resultHandler);
   }
 
   getUserData(targetApiUrl) {
     return fetch(targetApiUrl, {
+      credentials: 'include',
       headers: this._headers,
     }).then(resultHandler);
   }
@@ -38,6 +40,7 @@ class Api {
   setUserData(targetApiUrl, userData) {
     return fetch(targetApiUrl, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: userData.name,
@@ -49,6 +52,7 @@ class Api {
   setUserAvatar(targetApiUrl, avatar) {
     return fetch(targetApiUrl + '/avatar', {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar,
@@ -59,6 +63,7 @@ class Api {
   setNewCard(cardData) {
     return fetch(this._baseUrl, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: cardData.cardTitle,
@@ -70,6 +75,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(this._baseUrl + `/${cardId}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers,
     }).then(resultHandler);
   }
@@ -78,21 +84,20 @@ class Api {
     if (isLiked) {
       return fetch(this._baseUrl + `/${cardId}/likes`, {
         method: 'DELETE',
+        credentials: 'include',
         headers: this._headers,
       }).then(resultHandler);
     } else {
       return fetch(this._baseUrl + `/${cardId}/likes`, {
         method: 'PUT',
+        credentials: 'include',
         headers: this._headers,
       }).then(resultHandler);
     }
   }
 }
 
-export const api = new Api(
-  'https://mesto.nomoreparties.co/v1/cohort-41/cards',
-  {
-    authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
-    'Content-Type': 'application/json',
-  }
-);
+export const api = new Api('https://api.itmesto.students.nomoredomains.sbs/cards', {
+  authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
+  'Content-Type': 'application/json',
+});
