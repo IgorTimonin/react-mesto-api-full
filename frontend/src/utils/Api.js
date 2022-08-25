@@ -1,5 +1,7 @@
 export const resultHandler = (res) => {
   if (res.ok) {
+    // console.log(res.data);
+    // console.log(res.json());
     return res.json();
   }
   return Promise.reject(`Ошибка: ${res.status}`);
@@ -12,17 +14,17 @@ class Api {
     this.baseAuthUrl = 'https://api.itmesto.students.nomoredomains.sbs';
   }
 
-  signInSignUp(endpoint, password, email) {
-    return fetch(this.baseAuthUrl + `${endpoint}`, {
-      // origin: this.baseAuthUrl,
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        password,
-        email,
-      ),
-    }).then(resultHandler);
-  }
+  // signInSignUp(endpoint, password, email) {
+  //   return fetch(this.baseAuthUrl + `${endpoint}`, {
+  //     // origin: this.baseAuthUrl,
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(
+  //       password,
+  //       email,
+  //     ),
+  //   }).then(resultHandler);
+  // }
 
   getInitialCards() {
     return fetch(this._baseUrl, {
@@ -98,7 +100,11 @@ class Api {
   }
 }
 
+// export const api = new Api('https://api.itmesto.students.nomoredomains.sbs/cards', {
+//   authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
+//   'Content-Type': 'application/json',
+// });
+
 export const api = new Api('https://api.itmesto.students.nomoredomains.sbs/cards', {
-  authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
   'Content-Type': 'application/json',
 });

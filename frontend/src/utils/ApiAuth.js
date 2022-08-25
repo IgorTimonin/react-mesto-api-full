@@ -15,14 +15,14 @@ class ApiAuth {
     }).then(resultHandler);
   }
 
-  userValidation(endpoint, jwt) {
+  userValidation(endpoint) {
     return fetch(this.baseAuthUrl + `${endpoint}`, {
       method: 'GET',
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${jwt}`,
-      },
+      // headers: {
+        // 'Content-Type': 'application/json',
+        // Authorization: `Bearer ${jwt}`,
+      // },
     }).then(resultHandler);
   }
 }

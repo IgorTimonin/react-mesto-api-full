@@ -17,7 +17,6 @@ const {
   createUserValidator,
 } = require('./middlewares/dataValidation');
 const NotFoundError = require('./errors/NotFoundError');
-// const { cors } = require('./middlewares/cors');
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
@@ -28,6 +27,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger); // логгер запросов
+
 const corsOptions = {
   origin: 'https://itmesto.students.nomoredomains.sbs',
   credentials: true,
