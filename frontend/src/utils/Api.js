@@ -14,7 +14,7 @@ class Api {
 
   signInSignUp(endpoint, password, email) {
     return fetch(this.baseAuthUrl + `${endpoint}`, {
-      origin: this.baseAuthUrl,
+      // origin: this.baseAuthUrl,
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(

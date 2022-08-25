@@ -27,18 +27,18 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger); // логгер запросов
-app.use(cors);
-app.get('/crash-test', () => {
+// app.use(cors);
+app.get('/crash-test', cors, () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-app.post('/signin', celebrate(loginUserValidator), login);
-app.post('/signup', celebrate(createUserValidator), createUser);
+app.post('/signin', cors, celebrate(loginUserValidator), login);
+app.post('/signup', cors, celebrate(createUserValidator), createUser);
 
-app.use('/users', auth, userRouter);
-app.use('/cards', auth, cardRouter);
-app.use('/*', auth, (req, res, next) => {
+app.use('/users', cors, auth, userRouter);
+app.use('/cards', cors, auth, cardRouter);
+app.use('/*', cors, auth, (req, res, next) => {
   next(new NotFoundError('Упс! Такой страницы не существует'));
 });
 app.use(errorLogger); // логгер ошибок
