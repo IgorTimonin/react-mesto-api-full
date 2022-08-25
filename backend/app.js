@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
 const { celebrate, errors } = require('celebrate');
+const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-const cors = require('cors');
+
 const { PORT = 3000 } = process.env;
 const app = express();
 const cardRouter = require('./routes/cards');
@@ -27,7 +28,14 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger); // логгер запросов
-app.use(cors());
+const corsOptions = {
+  origin: 'https://itmesto.students.nomoredomains.sbs',
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
