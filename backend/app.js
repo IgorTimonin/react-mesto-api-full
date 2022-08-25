@@ -28,10 +28,24 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger); // логгер запросов
 
+// const corsOptions = {
+//   origin: 'https://itmesto.students.nomoredomains.sbs',
+//   credentials: true,
+//   optionsSuccessStatus: 200,
+// };
+
+const whitelist = [
+  'https://itmesto.students.nomoredomains.sbs',
+  'http://localhost:3000',
+];
 const corsOptions = {
-  origin: 'https://itmesto.students.nomoredomains.sbs',
-  credentials: true,
-  optionsSuccessStatus: 200,
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Запрещённый CORS'));
+    }
+  },
 };
 
 app.use(cors(corsOptions));
