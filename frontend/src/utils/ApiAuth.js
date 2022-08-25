@@ -7,6 +7,7 @@ class ApiAuth {
 
   signInSignUp(endpoint, password, email) {
     return fetch(this.baseAuthUrl + `${endpoint}`, {
+      origin: this.baseAuthUrl,
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

@@ -34,11 +34,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 app.post('/signin', celebrate(loginUserValidator), login);
-app.post(
-  '/signup',
-  celebrate(createUserValidator),
-  createUser,
-);
+app.post('/signup', celebrate(createUserValidator), createUser);
 
 app.use('/users', auth, userRouter);
 app.use('/cards', auth, cardRouter);
