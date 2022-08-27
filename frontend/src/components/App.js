@@ -153,11 +153,12 @@ function App() {
   function handleCardDeleteConfirm() {
     api
       .deleteCard(currentCard._id)
-      .then((newCards) =>
+      .then(
+        (newCards) => setCards(newCards)
         // Отправляем запрос на удаление в API, получаем обновлённые данные карточек, фильтром создаём новый объект карточек, без карточки с удалённым id
-        setCards((data) =>
-          data.filter((c) => (c._id === currentCard._id ? newCards : c))
-        )
+        // setCards((data) =>
+        //   data.filter((c) => (c._id === currentCard._id ? newCards : c))
+        // )
       )
       .then(() => {
         closeAllPopups();
