@@ -127,6 +127,7 @@ function App() {
   // }
 
     function tokenCheck() {
+      console.log('Начинаю tokenCheck');
         apiAuth
           .userValidation('/users/me')
           .then((res) => {
@@ -134,6 +135,7 @@ function App() {
               setHeaderEmail(res.email);
               setLoggenIn(true);
               nav('/');
+              console.log('Завершаю tokenCheck');
             }
           })
           .catch((err) => console.log(err));
@@ -149,6 +151,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log('useEffect с tokenCheck');
     tokenCheck();
   }, []);
 
@@ -163,7 +166,7 @@ function App() {
 
   function handleCardLike(card) {
     // Проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточек
     api
       .likeSwitcher(card._id, isLiked)
