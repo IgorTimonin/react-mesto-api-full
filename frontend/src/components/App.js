@@ -154,7 +154,9 @@ function App() {
     api
       .deleteCard(currentCard._id)
       .then(
-        (newCards) => {setCards(newCards)}
+        (newCards) => {
+          console.log(newCards);
+          setCards(newCards)}
         // Отправляем запрос на удаление в API, получаем обновлённые данные карточек, фильтром создаём новый объект карточек, без карточки с удалённым id
         // setCards((data) =>
         //   data.filter((c) => (c._id === currentCard._id ? newCards : c))
