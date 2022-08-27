@@ -39,9 +39,10 @@ module.exports.deleteCard = (req, res, next) => {
       return card.remove();
     })
     .then(() => {
-      res
-        .status(200)
-        .send({ message: `Карточка c id: ${req.params.cardId} удалёна.` });
+      Card.find({}).then((card) => res.send(card));
+      // res
+      //   .status(200)
+      //   .send({ message: `Карточка c id: ${req.params.cardId} удалёна.` });
     })
     .catch(next);
 };
