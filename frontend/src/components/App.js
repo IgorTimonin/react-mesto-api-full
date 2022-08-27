@@ -62,24 +62,11 @@ function App() {
       });
   }
 
-  // function onSignIn(password, email) {
-  //   apiAuth
-  //     .signInSignUp('/signin', password, email)
-  //     .then((res) => {
-  //       if (res.token) {
-  //         localStorage.setItem('jwt', res.token);
-  //         tokenCheck();
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
-
   function onSignIn(password, email) {
     apiAuth
       .signInSignUp('/signin', password, email)
       .then((res) => {
-        if (res.statusCode === 200) {
-          console.log(res);
+        if (res) {
           tokenCheck();
         }
       })
@@ -110,24 +97,7 @@ function App() {
     }
   }, [isOpen]);
 
-  // function tokenCheck() {
-  //   const jwt = localStorage.getItem('jwt');
-  //   if (jwt) {
-  //     apiAuth
-  //       .userValidation('/users/me', jwt)
-  //       .then((res) => {
-  //         if (res.data.email) {
-  //           setHeaderEmail(res.data.email);
-  //           setLoggenIn(true);
-  //           nav('/');
-  //         }
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }
-
     function tokenCheck() {
-      console.log('Начинаю tokenCheck');
         apiAuth
           .userValidation('/users/me')
           .then((res) => {
@@ -135,11 +105,14 @@ function App() {
               setHeaderEmail(res.email);
               setLoggenIn(true);
               nav('/');
-              console.log('Завершаю tokenCheck');
             }
           })
           .catch((err) => console.log(err));
     }
+
+  useEffect(() => {
+    nav('/');
+  }, [loggedIn]);
 
   useEffect(() => {
     api
@@ -151,7 +124,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log('useEffect с tokenCheck');
     tokenCheck();
   }, []);
 

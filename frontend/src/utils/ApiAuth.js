@@ -7,7 +7,6 @@ class ApiAuth {
 
   signInSignUp(endpoint, password, email) {
     return fetch(this.baseAuthUrl + `${endpoint}`, {
-      // origin: this.baseAuthUrl,
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -19,10 +18,6 @@ class ApiAuth {
     return fetch(this.baseAuthUrl + `${endpoint}`, {
       method: 'GET',
       credentials: 'include',
-      // headers: {
-        // 'Content-Type': 'application/json',
-        // Authorization: `Bearer ${jwt}`,
-      // },
     }).then(resultHandler);
   }
 }

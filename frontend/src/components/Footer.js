@@ -10,7 +10,7 @@ export default function Footer() {
   return (
       <footer className='footer'>
         <p className='footer__copyright'>
-          {date} &copy; Сделано с ❤️ Тимонин Игорь
+          {date} &copy; Make with ❤️ by Igor Timonin
         </p>
       </footer>
   );
