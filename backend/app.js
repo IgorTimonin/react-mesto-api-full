@@ -29,10 +29,7 @@ app.use(cookieParser());
 app.use(requestLogger); // логгер запросов
 
 const corsOptions = {
-  origin: [
-    'https://itmesto.students.nomoredomains.sbs',
-    'http://localhost:3000',
-  ],
+  origin: 'https://itmesto.students.nomoredomains.sbs',
   credentials: true,
   optionsSuccessStatus: 200,
 };
