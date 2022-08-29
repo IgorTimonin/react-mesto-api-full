@@ -55,19 +55,6 @@ function App() {
     }, {});
   }
 
-  const cookie = getCookie();
-
-  function checkSessionToken() {
-    if (cookie.sessionToken === 1) {
-      setLoggenIn(true);
-    }
-    else {
-      setLoggenIn(false);
-      console.log('Неверный токен сессии')
-      // console.log(`logout: ${cookie.sessionToken}`);
-    }
-  };
-
   function onSignUp(email, password) {
     apiAuth
       .signInSignUp('/signup', email, password)
@@ -95,6 +82,19 @@ function App() {
         }
       })
       .catch((err) => console.log(err));
+  }
+
+  const cookie = getCookie();
+
+  function checkSessionToken() {
+    console.log(`Проверка checkSessionToken. cookie.sessionToken равен: ${cookie.sessionToken}`)
+    if (cookie.sessionToken === 1) {
+      setLoggenIn(true);
+    } else {
+      setLoggenIn(false);
+      console.log('Неверный токен сессии');
+      // console.log(`logout: ${cookie.sessionToken}`);
+    }
   }
 
   function logUot() {
@@ -136,8 +136,8 @@ function App() {
           setHeaderEmail(res.email);
           // document.cookie = 'sessionToken=1';
           // cookie.sessionToken = 1;
-          console.log(document.cookie);
-          console.log(cookie);
+          console.log(`document.cookie: ${document.cookie}`);
+          console.log(`cookie: ${cookie}`);
           checkSessionToken();
           // setLoggenIn(true);
           // nav('/');

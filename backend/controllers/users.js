@@ -163,11 +163,13 @@ module.exports.login = (req, res, next) => {
       }
       return res
         .cookie('jwt', token, {
+          domain: '.itmesto.students.nomoredomains.sbs',
           maxAge: 3600000 * 7,
           httpOnly: true,
           sameSite: true,
         })
         .cookie('sessionToken', sessionToken, {
+          domain: '.itmesto.students.nomoredomains.sbs',
           maxAge: 3600000 * 7,
           httpOnly: false,
           sameSite: true,
