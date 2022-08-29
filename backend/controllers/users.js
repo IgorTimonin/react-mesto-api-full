@@ -157,7 +157,7 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      const sessionToken = '';
+      let sessionToken = '0';
       if (!token) {
         next(new UnauthorizedError('Ошибка при создании токена'));
       }
