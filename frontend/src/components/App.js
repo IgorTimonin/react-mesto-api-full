@@ -47,6 +47,27 @@ function App() {
     isInfoToolTipOpen ||
     selectedCard;
 
+  function getCookie() {
+    return document.cookie.split('; ').reduce((acc, item) => {
+      const [name, value] = item.split('=');
+
+      return { ...acc, [name]: value };
+    }, {});
+  }
+
+  const cookie = getCookie();
+
+  function checkSessionToken() {
+    if (cookie.sessionToken === 1) {
+      setLoggenIn(true);
+    }
+    else {
+      setLoggenIn(false);
+      console.log('Неверный токен сессии')
+      // console.log(`logout: ${cookie.sessionToken}`);
+    }
+  };
+
   function onSignUp(email, password) {
     apiAuth
       .signInSignUp('/signup', email, password)
@@ -67,6 +88,7 @@ function App() {
       .signInSignUp('/signin', password, email)
       .then((res) => {
         if (res) {
+          cookie.sessionToken = 1;
           tokenCheck();
         }
       })
@@ -74,8 +96,13 @@ function App() {
   }
 
   function logUot() {
-    setLoggenIn(false);
-    localStorage.removeItem('jwt');
+    cookie.sessionToken = 0;
+    // document.cookie = 'sessionToken=0';
+    checkSessionToken();
+    console.log(`logout: ${cookie.sessionToken}`);
+    // setLoggenIn(false);
+    // localStorage.removeItem('jwt');
+    // document.cookie = `sidebar=;expires=${new Date(0)}`;
   }
 
   function onRegisterRedirect() {
@@ -97,18 +124,22 @@ function App() {
     }
   }, [isOpen]);
 
-    function tokenCheck() {
-        apiAuth
-          .userValidation('/users/me')
-          .then((res) => {
-            if (res.email) {
-              setHeaderEmail(res.email);
-              setLoggenIn(true);
-              nav('/');
-            }
-          })
-          .catch((err) => console.log(err));
-    }
+  function tokenCheck() {
+    apiAuth
+      .userValidation('/users/me')
+      .then((res) => {
+        if (res.email) {
+          setHeaderEmail(res.email);
+          // document.cookie = 'sessionToken=1';
+          // cookie.sessionToken = 1;
+          console.log(cookie);
+          checkSessionToken();
+          // setLoggenIn(true);
+          // nav('/');
+        }
+      })
+      .catch((err) => console.log(err));
+  }
 
   useEffect(() => {
     nav('/');

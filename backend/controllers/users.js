@@ -157,7 +157,7 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      let sessionToken = '0';
+      // let sessionToken = '';
       if (!token) {
         next(new UnauthorizedError('Ошибка при создании токена'));
       }
@@ -167,11 +167,11 @@ module.exports.login = (req, res, next) => {
           httpOnly: true,
           sameSite: true,
         })
-        .cookie('sessionToken', sessionToken, {
-          maxAge: 3600000 * 7,
-          httpOnly: false,
-          sameSite: true,
-        })
+        // .cookie('sessionToken', sessionToken, {
+        //   maxAge: 3600000 * 7,
+        //   httpOnly: false,
+        //   sameSite: true,
+        // })
         .status(200)
         .send({ message: 'Успешный вход' });
     })
