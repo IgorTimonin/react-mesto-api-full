@@ -88,7 +88,9 @@ function App() {
       .signInSignUp('/signin', password, email)
       .then((res) => {
         if (res) {
-          cookie.sessionToken = 1;
+          // cookie.sessionToken = 1;
+          console.log(document.cookie);
+          console.log(cookie);
           tokenCheck();
         }
       })
@@ -96,9 +98,11 @@ function App() {
   }
 
   function logUot() {
-    cookie.sessionToken = 0;
-    // document.cookie = 'sessionToken=0';
+    document.cookie = `sessionToken=;expires=${new Date(0)}`;
+    // document.cookie = `'';expires=${new Date(0)}`;
     checkSessionToken();
+    console.log(document.cookie);
+    console.log(cookie);
     console.log(`logout: ${cookie.sessionToken}`);
     // setLoggenIn(false);
     // localStorage.removeItem('jwt');
@@ -132,6 +136,7 @@ function App() {
           setHeaderEmail(res.email);
           // document.cookie = 'sessionToken=1';
           // cookie.sessionToken = 1;
+          console.log(document.cookie);
           console.log(cookie);
           checkSessionToken();
           // setLoggenIn(true);
