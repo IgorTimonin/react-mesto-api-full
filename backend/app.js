@@ -36,13 +36,14 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.get('/crash-test', () => {
+app.post('/signin', celebrate(loginUserValidator), login);
+app.post('/signup', celebrate(createUserValidator), createUser);
+
+app.get('/crash-test', auth, () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-app.post('/signin', celebrate(loginUserValidator), login);
-app.post('/signup', celebrate(createUserValidator), createUser);
 
 app.use('/users', auth, userRouter);
 app.use('/cards', auth, cardRouter);
