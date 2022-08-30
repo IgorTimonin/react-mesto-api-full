@@ -109,27 +109,27 @@ function App() {
   }, [isOpen]);
 
   function tokenCheck() {
-      apiAuth
-        .userValidation('/users/me')
-        .then((res) => {
-          if (res.email) {
-            setHeaderEmail(res.email);
-            setCurrentUser(res);
-            initCards();
-            setLoggenIn(true);
-          }
-        })
-        .catch((err) => console.log(err));
+    apiAuth
+      .userValidation('/users/me')
+      .then((res) => {
+        if (res.email) {
+          setHeaderEmail(res.email);
+          setCurrentUser(res);
+          initCards();
+          setLoggenIn(true);
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   const initCards = () => {
-  api
+    api
       .getInitialCards()
       .then((cardsList) => {
         setCards(cardsList);
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   useEffect(() => {
     nav('/');

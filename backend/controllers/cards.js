@@ -40,9 +40,6 @@ module.exports.deleteCard = (req, res, next) => {
     })
     .then(() => {
       Card.find({}).then((card) => res.send(card));
-      // res
-      //   .status(200)
-      //   .send({ message: `Карточка c id: ${req.params.cardId} удалёна.` });
     })
     .catch(next);
 };

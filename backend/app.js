@@ -34,20 +34,6 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-// const whitelist = [
-//   'https://itmesto.students.nomoredomains.sbs',
-//   'http://localhost:3000',
-// ];
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1 || !origin) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Запрещённый CORS'));
-//     }
-//   },
-// };
-
 app.use(cors(corsOptions));
 
 app.get('/crash-test', () => {
