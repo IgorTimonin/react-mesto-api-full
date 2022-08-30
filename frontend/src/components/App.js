@@ -67,7 +67,6 @@ function App() {
       .signInSignUp('/signin', password, email)
       .then((res) => {
         if (res) {
-          console.log(res.status);
           localStorage.setItem('sessionToken', '1');
           checkSessionToken();
         }
