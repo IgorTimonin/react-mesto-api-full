@@ -47,13 +47,13 @@ function App() {
     isInfoToolTipOpen ||
     selectedCard;
 
-  function getCookie() {
-    return document.cookie.split('; ').reduce((acc, item) => {
-      const [name, value] = item.split('=');
+  // function getCookie() {
+  //   return document.cookie.split('; ').reduce((acc, item) => {
+  //     const [name, value] = item.split('=');
 
-      return { ...acc, [name]: value };
-    }, {});
-  }
+  //     return { ...acc, [name]: value };
+  //   }, {});
+  // }
 
   function onSignUp(email, password) {
     apiAuth
@@ -76,34 +76,35 @@ function App() {
       .then((res) => {
         if (res) {
           // cookie.sessionToken = 1;
-          console.log(document.cookie);
-          console.log(cookie);
+          console.log([document.cookie]);
+          // console.log(cookie);
           tokenCheck();
         }
       })
       .catch((err) => console.log(err));
   }
 
-  const cookie = getCookie();
+  // const cookie = getCookie();
 
   function checkSessionToken() {
-    console.log(`Проверка checkSessionToken. cookie.sessionToken равен: ${cookie.sessionToken}`)
-    if (cookie.sessionToken === 1) {
+    console.log(
+      `Проверка cookie.sessionToken равен: ${document.cookie.sessionToken}`
+    );
+    if (document.cookie === 'sessionToken=1') {
       setLoggenIn(true);
     } else {
       setLoggenIn(false);
       console.log('Неверный токен сессии');
-      // console.log(`logout: ${cookie.sessionToken}`);
     }
   }
 
   function logUot() {
-    document.cookie = `sessionToken=;expires=${new Date(0)}`;
+    document.cookie.sessionToken = `sessionToken=0;expires=${new Date(0)}`;
+    // cookie.sessionToken = 0;
     // document.cookie = `'';expires=${new Date(0)}`;
     checkSessionToken();
-    console.log(document.cookie);
-    console.log(cookie);
-    console.log(`logout: ${cookie.sessionToken}`);
+    // console.log(cookie);
+    console.log(`logout: ${document.cookie}`);
     // setLoggenIn(false);
     // localStorage.removeItem('jwt');
     // document.cookie = `sidebar=;expires=${new Date(0)}`;
@@ -137,7 +138,7 @@ function App() {
           // document.cookie = 'sessionToken=1';
           // cookie.sessionToken = 1;
           console.log(`document.cookie: ${document.cookie}`);
-          console.log(`cookie: ${cookie}`);
+          // console.log(`cookie: ${cookie.sessionToken}`);
           checkSessionToken();
           // setLoggenIn(true);
           // nav('/');

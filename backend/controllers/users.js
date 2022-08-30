@@ -157,20 +157,20 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      let sessionToken = 1;
+      const sessionToken = '1';
       if (!token) {
         next(new UnauthorizedError('Ошибка при создании токена'));
       }
       return res
         .cookie('jwt', token, {
-          domain: '.itmesto.students.nomoredomains.sbs',
-          maxAge: 3600000 * 7,
+          domain: 'itmesto.students.nomoredomains.sbs',
+          maxAge: 3600000 * 24 * 7,
           httpOnly: true,
           sameSite: true,
         })
         .cookie('sessionToken', sessionToken, {
-          domain: '.itmesto.students.nomoredomains.sbs',
-          maxAge: 3600000 * 7,
+          domain: 'itmesto.students.nomoredomains.sbs',
+          maxAge: 3600000 * 24 * 7,
           httpOnly: false,
           sameSite: true,
         })
