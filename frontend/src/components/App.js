@@ -47,13 +47,13 @@ function App() {
     isInfoToolTipOpen ||
     selectedCard;
 
-  // function getCookie() {
-  //   return document.cookie.split('; ').reduce((acc, item) => {
-  //     const [name, value] = item.split('=');
+  function getCookie() {
+    return document.cookie.split('; ').reduce((acc, item) => {
+      const [name, value] = item.split('=');
 
-  //     return { ...acc, [name]: value };
-  //   }, {});
-  // }
+      return { ...acc, [name]: value };
+    }, {});
+  }
 
   function onSignUp(email, password) {
     apiAuth
@@ -76,8 +76,8 @@ function App() {
       .then((res) => {
         if (res) {
           // cookie.sessionToken = 1;
-          console.log([document.cookie]);
-          // console.log(cookie);
+          console.log(res);
+          localStorage.setItem('sessionToken', 1);
           tokenCheck();
         }
       })
@@ -87,10 +87,10 @@ function App() {
   // const cookie = getCookie();
 
   function checkSessionToken() {
-    console.log(
-      `Проверка cookie.sessionToken равен: ${document.cookie.sessionToken}`
-    );
-    if (document.cookie === 'sessionToken=1') {
+    const sessionToken = localStorage.getItem('sessionToken');
+    if (sessionToken === 1) {
+    // console.log(`document.cookie равен: ${document.cookie}`);
+    // if (document.cookie === 'sessionToken=1') {
       setLoggenIn(true);
     } else {
       setLoggenIn(false);
@@ -99,14 +99,18 @@ function App() {
   }
 
   function logUot() {
-    document.cookie.sessionToken = `sessionToken=0;expires=${new Date(0)}`;
+    // const cookie = getCookie();
+    // console.log(cookie)
+    // document.cookie = `sessionToken=0;expires=${new Date(0)}`;
     // cookie.sessionToken = 0;
+    // console.log(cookie.sessionToken);
     // document.cookie = `'';expires=${new Date(0)}`;
+    localStorage.removeItem('sessionToken');
     checkSessionToken();
     // console.log(cookie);
-    console.log(`logout: ${document.cookie}`);
+    // console.log(`logout: ${document.cookie}`);
     // setLoggenIn(false);
-    // localStorage.removeItem('jwt');
+    
     // document.cookie = `sidebar=;expires=${new Date(0)}`;
   }
 
@@ -130,21 +134,21 @@ function App() {
   }, [isOpen]);
 
   function tokenCheck() {
-    apiAuth
-      .userValidation('/users/me')
-      .then((res) => {
-        if (res.email) {
-          setHeaderEmail(res.email);
-          // document.cookie = 'sessionToken=1';
-          // cookie.sessionToken = 1;
-          console.log(`document.cookie: ${document.cookie}`);
-          // console.log(`cookie: ${cookie.sessionToken}`);
-          checkSessionToken();
-          // setLoggenIn(true);
-          // nav('/');
-        }
-      })
-      .catch((err) => console.log(err));
+      apiAuth
+        .userValidation('/users/me')
+        .then((res) => {
+          if (res.email) {
+            setHeaderEmail(res.email);
+            // document.cookie = 'sessionToken=1';
+            // cookie.sessionToken = 1;
+            // console.log(`document.cookie: ${document.cookie}`);
+            // console.log(`cookie: ${cookie.sessionToken}`);
+            checkSessionToken();
+            // setLoggenIn(true);
+            // nav('/');
+          }
+        })
+        .catch((err) => console.log(err));
   }
 
   useEffect(() => {
