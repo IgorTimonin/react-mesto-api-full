@@ -33,7 +33,9 @@ module.exports.createUser = (req, res, next) => {
         }))
         .catch((err) => {
           if (err.code === 11000) {
-            next(new ConflictError('Пользователь c таким email уже существует'));
+            next(
+              new ConflictError('Пользователь c таким email уже существует'),
+            );
           } else if (err.name === 'ValidationError') {
             next(
               new BadRequestError(
@@ -58,9 +60,7 @@ module.exports.getAllUsers = (req, res, next) => {
 
 module.exports.getUserById = (req, res, next) => {
   User.findById(req.params.userId)
-    .orFail(
-      () => next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`)),
-    )
+    .orFail(() => next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`)))
     .then((user) => {
       res.send(user);
     })
@@ -75,9 +75,7 @@ module.exports.getUserById = (req, res, next) => {
 
 module.exports.getMe = (req, res, next) => {
   User.findById(req.user._id)
-    .orFail(
-      () => next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`)),
-    )
+    .orFail(() => next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`)))
     .then((user) => {
       res.send(user);
     })
@@ -100,9 +98,7 @@ module.exports.updateUserProfile = (req, res, next) => {
       runValidators: true,
     },
   )
-    .orFail(
-      () => next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`)),
-    )
+    .orFail(() => next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`)))
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -127,9 +123,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
       runValidators: true,
     },
   )
-    .orFail(
-      () => next(new NotFoundError('Пользователь не найден.')),
-    )
+    .orFail(() => next(new NotFoundError('Пользователь не найден.')))
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -155,7 +149,7 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'development' ? JWT_SECRET : 'dev-secret',
-        { expiresIn: '7d' }
+        { expiresIn: '7d' },
       );
       if (!token) {
         next(new UnauthorizedError('Ошибка при создании токена'));
