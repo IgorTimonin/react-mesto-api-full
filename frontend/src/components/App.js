@@ -47,14 +47,6 @@ function App() {
     isInfoToolTipOpen ||
     selectedCard;
 
-  function getCookie() {
-    return document.cookie.split('; ').reduce((acc, item) => {
-      const [name, value] = item.split('=');
-
-      return { ...acc, [name]: value };
-    }, {});
-  }
-
   function onSignUp(email, password) {
     apiAuth
       .signInSignUp('/signup', email, password)
@@ -75,43 +67,26 @@ function App() {
       .signInSignUp('/signin', password, email)
       .then((res) => {
         if (res) {
-          // cookie.sessionToken = 1;
-          console.log(res);
-          localStorage.setItem('sessionToken', 1);
-          tokenCheck();
+          console.log(res.status);
+          localStorage.setItem('sessionToken', '1');
+          checkSessionToken();
         }
       })
       .catch((err) => console.log(err));
   }
 
-  // const cookie = getCookie();
-
   function checkSessionToken() {
     const sessionToken = localStorage.getItem('sessionToken');
-    if (sessionToken === 1) {
-    // console.log(`document.cookie равен: ${document.cookie}`);
-    // if (document.cookie === 'sessionToken=1') {
-      setLoggenIn(true);
+    if (sessionToken === '1') {
+      tokenCheck();
     } else {
-      setLoggenIn(false);
       console.log('Неверный токен сессии');
     }
   }
 
   function logUot() {
-    // const cookie = getCookie();
-    // console.log(cookie)
-    // document.cookie = `sessionToken=0;expires=${new Date(0)}`;
-    // cookie.sessionToken = 0;
-    // console.log(cookie.sessionToken);
-    // document.cookie = `'';expires=${new Date(0)}`;
     localStorage.removeItem('sessionToken');
-    checkSessionToken();
-    // console.log(cookie);
-    // console.log(`logout: ${document.cookie}`);
-    // setLoggenIn(false);
-    
-    // document.cookie = `sidebar=;expires=${new Date(0)}`;
+    setLoggenIn(false);
   }
 
   function onRegisterRedirect() {
@@ -139,16 +114,21 @@ function App() {
         .then((res) => {
           if (res.email) {
             setHeaderEmail(res.email);
-            // document.cookie = 'sessionToken=1';
-            // cookie.sessionToken = 1;
-            // console.log(`document.cookie: ${document.cookie}`);
-            // console.log(`cookie: ${cookie.sessionToken}`);
-            checkSessionToken();
-            // setLoggenIn(true);
-            // nav('/');
+            setCurrentUser(res);
+            initCards();
+            setLoggenIn(true);
           }
         })
         .catch((err) => console.log(err));
+  }
+
+  const initCards = () => {
+  api
+      .getInitialCards()
+      .then((cardsList) => {
+        setCards(cardsList);
+      })
+      .catch((err) => console.log(err));
   }
 
   useEffect(() => {
@@ -156,25 +136,7 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    api
-      .getUserData(userDataTargetUrl)
-      .then((userData) => {
-        setCurrentUser(userData);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    tokenCheck();
-  }, []);
-
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((cardsList) => {
-        setCards(cardsList);
-      })
-      .catch((err) => console.log(err));
+    checkSessionToken();
   }, []);
 
   function handleCardLike(card) {
