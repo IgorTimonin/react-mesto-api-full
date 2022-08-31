@@ -35,7 +35,9 @@ function App() {
   });
   const [headerEmail, setHeaderEmail] = useState();
   const [currentCard, setCurrentCard] = useState({});
-  const userDataTargetUrl = /https?:\/\/api.itmesto.students.nomoredomains.sbs\/users\/me/;
+  const userDataTargetUrl =
+    'https://api.itmesto.students.nomoredomains.sbs/users/me';
+  // /https?:\/\/api.itmesto.students.nomoredomains.sbs\/users\/me/;
     // 'https://api.itmesto.students.nomoredomains.sbs/users/me';
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggenIn] = useState(false);
