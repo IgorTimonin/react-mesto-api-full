@@ -9,7 +9,9 @@ class Api {
   constructor(baseUrl, headers) {
     this._baseUrl = baseUrl;
     this._headers = headers;
-    this.baseAuthUrl = 'https://api.itmesto.students.nomoredomains.sbs';
+    this.baseAuthUrl = 'TEST1'
+    // /https?:\/\/api.itmesto.students.nomoredomains.sbs/
+    // 'https://api.itmesto.students.nomoredomains.sbs';
   }
 
   getInitialCards() {
@@ -86,6 +88,10 @@ class Api {
   }
 }
 
-export const api = new Api('https://api.itmesto.students.nomoredomains.sbs/cards', {
-  'Content-Type': 'application/json',
-});
+// export const api = new Api('https://api.itmesto.students.nomoredomains.sbs/cards', {
+  export const api = new Api( 'TEST2',
+    // /https?:\/\/api.itmesto.students.nomoredomains.sbs\/cards/,
+    {
+      'Content-Type': 'application/json',
+    }
+  );

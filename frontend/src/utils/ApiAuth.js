@@ -1,8 +1,10 @@
 import { resultHandler } from './Api';
 
 class ApiAuth {
-  constructor() {
-    this.baseAuthUrl = 'https://api.itmesto.students.nomoredomains.sbs';
+  constructor() { this.baseAuthUrl = 'https://api.itmesto.students.nomoredomains.sbs';
+    // this.baseAuthUrl = "TEST_Auth"
+    // /https?:\/\/api.itmesto.students.nomoredomains.sbs/;
+    // this.baseAuthUrl = 'https://api.itmesto.students.nomoredomains.sbs';
   }
 
   signInSignUp(endpoint, password, email) {
