@@ -10,8 +10,6 @@ class Api {
     this._baseUrl = baseUrl;
     this._headers = headers;
     this.baseAuthUrl = 'https://api.itmesto.students.nomoredomains.sbs';
-    // /https?:\/\/api.itmesto.students.nomoredomains.sbs/
-    // 'https://api.itmesto.students.nomoredomains.sbs';
   }
 
   getInitialCards() {
@@ -88,10 +86,8 @@ class Api {
   }
 }
 
-// export const api = new Api('https://api.itmesto.students.nomoredomains.sbs/cards', {
   export const api = new Api(
     'https://api.itmesto.students.nomoredomains.sbs/cards',
-    // /https?:\/\/api.itmesto.students.nomoredomains.sbs\/cards/,
     {
       'Content-Type': 'application/json',
     }

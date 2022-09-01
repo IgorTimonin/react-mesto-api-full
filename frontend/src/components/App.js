@@ -37,8 +37,6 @@ function App() {
   const [currentCard, setCurrentCard] = useState({});
   const userDataTargetUrl =
     'https://api.itmesto.students.nomoredomains.sbs/users/me';
-  // /https?:\/\/api.itmesto.students.nomoredomains.sbs\/users\/me/;
-    // 'https://api.itmesto.students.nomoredomains.sbs/users/me';
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggenIn] = useState(false);
   const nav = useNavigate();

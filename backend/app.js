@@ -30,7 +30,6 @@ app.use(requestLogger); // логгер запросов
 
 const corsOptions = {
   origin: /https?:\/\/itmesto.students.nomoredomains.sbs/,
-  // 'https://itmesto.students.nomoredomains.sbs',
   credentials: true,
   optionsSuccessStatus: 200,
 };
