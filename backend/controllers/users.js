@@ -159,7 +159,7 @@ module.exports.login = (req, res, next) => {
           domain: 'itmesto.students.nomoredomains.sbs',
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
-          sameSite: false,
+          sameSite: 'none',
           secure: false,
         })
         .status(200)
