@@ -72,6 +72,9 @@ function App() {
           localStorage.setItem('sessionToken', '1');
           checkSessionToken();
         }
+        if (res.cookie === undefined) {
+          console.log('Для авторизации необходимо использовать HTTPS протокол')
+        }
       })
       .catch((err) => console.log(err));
   }
