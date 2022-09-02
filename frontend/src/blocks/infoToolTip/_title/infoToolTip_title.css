@@ -9,3 +9,9 @@
     padding-bottom: 26px;
     text-align: center;
 }
+
+@media screen and (max-width: 945px) {
+  .infoToolTip_title {
+    font-size: 21px;
+  }
+}

@@ -12,3 +12,9 @@
   transition: linear 0.3s;
   text-decoration: none;
 }
+
+@media screen and (max-width: 945px) {
+  .header__user-btn {
+    margin-left: 10px;
+  }
+}

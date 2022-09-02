@@ -6,11 +6,11 @@
   border-bottom: 1px solid #545454;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: center;
+  align-items: flex-end;
 }
 
 @media screen and (max-width: 945px) {
   .header {
-    padding: 28px 27px 32px 27px;
+    padding: 28px 10px 32px 10px;
   }
 }
