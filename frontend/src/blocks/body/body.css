@@ -1,4 +1,6 @@
 .body {
   background-color: #000;
+  background-image: url(/src/images/yannick-pulver-1NiGuXjsecs-unsplash.jpg);
+  background-size: contain;
   margin: 0;
 }

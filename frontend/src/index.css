@@ -60,7 +60,7 @@
 @import url(../src/blocks/auth/__login-text/auth__login-text.css);
 
 #root {
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0);
   margin: 0 auto;
   display: flex;
   flex-direction: column;

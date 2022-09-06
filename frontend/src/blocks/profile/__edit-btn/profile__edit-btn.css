@@ -1,7 +1,7 @@
 .profile__edit-btn {
   padding: 0 10px;
   margin: 0 15px;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0);
   background-image: url(../../../images/pencil.svg);
   background-position: center;
   background-repeat: no-repeat;
