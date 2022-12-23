@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      default: 'Жак-Ив Кусто',
+      default: 'Ваше имя',
       minlength: [
         2,
         'Имя должно быть длиннее 2-х символов, сейчас его длина {VALUE} символ(ов)',
@@ -32,8 +32,7 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
       validate: linkRegExPattern,
-      default:
-        'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
+      default: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
     },
     email: {
       type: String,
@@ -49,10 +48,13 @@ const userSchema = new mongoose.Schema(
   },
   {
     versionKey: false,
-  },
+  }
 );
 
-userSchema.statics.findUserByCredentials = function userValidation(email, password) {
+userSchema.statics.findUserByCredentials = function userValidation(
+  email,
+  password
+) {
   return this.findOne({ email })
     .select('+password')
     .then((user) => {

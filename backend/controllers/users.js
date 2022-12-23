@@ -11,9 +11,7 @@ const ConflictError = require('../errors/ConflictError');
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.createUser = (req, res, next) => {
-  const {
-    name, about, avatar, email, password,
-  } = req.body;
+  const { name, about, avatar, email, password } = req.body;
   return bcrypt
     .hash(password, SALT_ROUND)
     .then((hash) => {
@@ -24,25 +22,27 @@ module.exports.createUser = (req, res, next) => {
         email,
         password: hash,
       })
-        .then(({ _id }) => res.send({
-          name,
-          about,
-          avatar,
-          email,
-          _id,
-        }))
+        .then(({ _id }) =>
+          res.send({
+            name,
+            about,
+            avatar,
+            email,
+            _id,
+          })
+        )
         .catch((err) => {
           if (err.code === 11000) {
             next(
-              new ConflictError('Пользователь c таким email уже существует'),
+              new ConflictError('Пользователь c таким email уже существует')
             );
           } else if (err.name === 'ValidationError') {
             next(
               new BadRequestError(
                 `${Object.values(err.errors)
                   .map((error) => error.massage)
-                  .join(', ')}`,
-              ),
+                  .join(', ')}`
+              )
             );
           } else {
             next(err);
@@ -60,7 +60,9 @@ module.exports.getAllUsers = (req, res, next) => {
 
 module.exports.getUserById = (req, res, next) => {
   User.findById(req.params.userId)
-    .orFail(() => next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`)))
+    .orFail(() =>
+      next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`))
+    )
     .then((user) => {
       res.send(user);
     })
@@ -75,7 +77,9 @@ module.exports.getUserById = (req, res, next) => {
 
 module.exports.getMe = (req, res, next) => {
   User.findById(req.user._id)
-    .orFail(() => next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`)))
+    .orFail(() =>
+      next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`))
+    )
     .then((user) => {
       res.send(user);
     })
@@ -96,16 +100,18 @@ module.exports.updateUserProfile = (req, res, next) => {
     {
       new: true,
       runValidators: true,
-    },
+    }
   )
-    .orFail(() => next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`)))
+    .orFail(() =>
+      next(new NotFoundError(`Пользователь с id: ${req.user._id} не найден.`))
+    )
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(
           new BadRequestError(
-            'Переданы некорректные данные для обновления информации о пользователе',
-          ),
+            'Переданы некорректные данные для обновления информации о пользователе'
+          )
         );
       } else {
         next(err);
@@ -121,7 +127,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
     {
       new: true,
       runValidators: true,
-    },
+    }
   )
     .orFail(() => next(new NotFoundError('Пользователь не найден.')))
     .then((user) => res.send(user))
@@ -129,8 +135,8 @@ module.exports.updateUserAvatar = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(
           new BadRequestError(
-            'Переданы некорректные данные для обновления аватара',
-          ),
+            'Переданы некорректные данные для обновления аватара'
+          )
         );
       } else {
         next(err);
@@ -149,7 +155,7 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        { expiresIn: '7d' },
+        { expiresIn: '7d' }
       );
       if (!token) {
         next(new UnauthorizedError('Ошибка при создании токена'));
